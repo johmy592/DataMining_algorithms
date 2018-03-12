@@ -52,6 +52,9 @@ def _get_intervals(data, attr_info, num_bins, ignore_attr=None):
     return intervals
 
 def make_discrete(data, attr_info, num_bins, ignore_attr=None):
+    
+    class_attr = -1 if not ignore_attr else ignore_attr
+
     intervals = _get_intervals(data, attr_info, num_bins, ignore_attr)
     print(intervals)
     names = [info[0] for info in attr_info]
@@ -74,10 +77,11 @@ def make_discrete(data, attr_info, num_bins, ignore_attr=None):
             for j,interval in enumerate(name_val_dict[name]):
                 if item > interval[0] and item < interval[1]:
                     discrete_transaction.append(j)
+        discrete_transaction.append(transaction[class_attr])
         discrete_data.append(discrete_transaction)
     print(discrete_data)
     return discrete_data, name_val_dict
                 
 def main():
     transactions, attr_info = read_transaction_data("iris.txt")
-    discrete_transactions, translation_dict = make_discrete(transactions, attr_info, 3, -1)
+    discrete_transactions, translation_dict = make_discrete(transactions, attr_info, 3,-1)
