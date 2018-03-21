@@ -3,6 +3,11 @@ def get_numeric_types():
 
 
 def read_transaction_data(path):
+    """
+    Reads a textfile and returns transaction data contained in the file.
+    Returns a tuple containing a list of all transactions and  a list 
+    containing tuples with attribute names and types.
+    """
     attribute_names_types = []
     transactions = []
     past_data_marker = False
